@@ -36,14 +36,18 @@ public class App {
 		job.setJob("Job");
 		job.setInsertTime(new Date());
         session.save(job);
+        session.getTransaction().commit();
 
         Runnable jenkinsJobRunnable = new Runnable() {
             public void run() {
+                session = HibernateUtil.getSessionFactory().getCurrentSession();
+                session.beginTransaction();
                 String hql = "FROM JenkinsJob";
                 Query query = session.createQuery(hql);
                 query.setMaxResults(1);
                 List results = query.list();
                 System.out.println("JenkinsJob="+results.toString());
+                session.getTransaction().commit();
                 // HibernateUtil.getSessionFactory().close();
             }
         };
@@ -51,6 +55,4 @@ public class App {
         ScheduledExecutorService executor = Executors.newScheduledThreadPool(1);
         executor.scheduleAtFixedRate(jenkinsJobRunnable, 0, 10, TimeUnit.SECONDS);
     }
-
-
 }

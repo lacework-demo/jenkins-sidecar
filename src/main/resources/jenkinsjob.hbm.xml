@@ -4,8 +4,8 @@
 
 <hibernate-mapping>
 	<class name="com.sidecar.model.JenkinsJob" table="JENKINSJOB">
-        <id name="id" type="int">
-            <column name="ID" />
+        <id name="id" type="int" >
+            <column name="ID" unique="true"/>
             <generator class="increment" />
         </id>
         <property name="job" type="java.lang.String">
