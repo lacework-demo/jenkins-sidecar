@@ -44,11 +44,9 @@ public class App {
                 session.beginTransaction();
                 String hql = "FROM JenkinsJob";
                 Query query = session.createQuery(hql);
-                query.setMaxResults(1);
                 List results = query.list();
-                System.out.println("JenkinsJob="+results.toString());
+                System.out.println("JenkinsJob="+results.toArray().length);
                 session.getTransaction().commit();
-                // HibernateUtil.getSessionFactory().close();
             }
         };
 

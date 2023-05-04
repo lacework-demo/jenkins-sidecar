@@ -6,7 +6,7 @@
 	<class name="com.sidecar.model.JenkinsJob" table="JENKINSJOB">
         <id name="id" type="int" >
             <column name="ID" unique="true"/>
-            <generator class="increment" />
+            <generator class="sequence" />
         </id>
         <property name="job" type="java.lang.String">
             <column name="Job" />

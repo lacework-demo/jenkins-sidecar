@@ -26,6 +26,19 @@ public class HibernateUtil {
             configuration.configure(config);
             System.out.println("Hibernate Configuration loaded");
 
+            String url = System.getenv("DATABASE_URL");
+            if( url != null){
+                configuration.setProperty("hibernate.connection.url", url);
+            }
+            String username = System.getenv("DATABASE_USERNAME");
+            if( username != null){
+                configuration.setProperty("hibernate.connection.username", username);
+            }
+            String password = System.getenv("DATABASE_PASSWORD");
+            if( password != null){
+                configuration.setProperty("hibernate.connection.password", password);
+            }
+
             ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties()).build();
             System.out.println("Hibernate serviceRegistry created");
 
